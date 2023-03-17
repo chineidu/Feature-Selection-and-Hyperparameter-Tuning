@@ -31,15 +31,12 @@ class BestFeatures:
         self.data = data
         self.target = target
         if type_ not in [self.REGRESSION, self.CLASSIFICATION]:
-            raise Exception(
-                f"{type_!r} must be {self.type_list[0]!r} or {self.type_list[1]!r}"
-            )
+            raise Exception(f"{type_!r} must be {self.REGRESSION!r} or {self.CLASSIFICATION!r}")
         self.type_ = type_.lower().strip()
         self.random_state = random_state
+        self.n_estimators = 40
         self.eval_metric = self.MAE if self.type_ == self.REGRESSION else self.ROC_AUC
-        self.status = (
-            "lower is better!" if self.type_ == self.REGRESSION else "higher is better!"
-        )
+        self.status = "lower is better!" if self.type_ == self.REGRESSION else "higher is better!"
         self.order = False if self.type_ == self.REGRESSION else True
         self.feature_rankings = {}
 
@@ -72,18 +69,20 @@ class BestFeatures:
                     display_shape=False,
                 )
                 if self.type_ == self.REGRESSION:  # regression
-                    estimator = RandomForestRegressor(random_state=self.random_state)
+                    estimator = RandomForestRegressor(
+                        n_estimators=self.n_estimators, random_state=self.random_state
+                    )
                     # Fit model
                     estimator.fit(X_train, y_train)
                     # Make predictions
                     y_pred = estimator.predict(X_validation)
                     # Evaluate estimator
-                    mae = metrics.mean_absolute_error(
-                        y_true=y_validation, y_pred=y_pred
-                    )
+                    mae = metrics.mean_absolute_error(y_true=y_validation, y_pred=y_pred)
                     self.feature_rankings[feat] = mae
                 else:  # classification
-                    estimator = RandomForestClassifier(random_state=self.random_state)
+                    estimator = RandomForestClassifier(
+                        n_estimators=self.n_estimators, random_state=self.random_state
+                    )
                     # Fit model
                     estimator.fit(X_train, y_train)
                     y_pred = estimator.predict_proba(X_validation)[:, 1]
@@ -107,9 +106,7 @@ class BestFeatures:
         df = pd.DataFrame(self.feature_rankings, index=[0]).T
         eval_metric = self.MAE if self.type_ == self.REGRESSION else self.ROC_AUC
 
-        df = df.rename(columns={0: eval_metric}).sort_values(
-            by=eval_metric, ascending=self.order
-        )
+        df = df.rename(columns={0: eval_metric}).sort_values(by=eval_metric, ascending=self.order)
 
         THRESH = (
             np.percentile(df[eval_metric], q=40)
@@ -154,7 +151,5 @@ class BestFeatures:
     @staticmethod
     def _sort_dict(*, input_dict: dict, ascending: bool = True) -> dict:
         """This is used to sort a dict using the values."""
-        sorted_dict = dict(
-            sorted(input_dict.items(), key=lambda x: x[1], reverse=ascending)
-        )
+        sorted_dict = dict(sorted(input_dict.items(), key=lambda x: x[1], reverse=ascending))
         return sorted_dict
