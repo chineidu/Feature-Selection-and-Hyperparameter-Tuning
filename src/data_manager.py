@@ -19,5 +19,4 @@ def load_data(*, filename: str, sep: str = ",") -> pd.DataFrame:
         data (pd.DataFrame): The loaded dataframe.
     """
     data = pd.read_csv(filename, sep=sep)
-    print(f"Shape of data: {data.shape}\n")
     return data
