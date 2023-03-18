@@ -13,7 +13,7 @@ def load_data(*, filename: str, sep: str = ",") -> pd.DataFrame:
 
     Params;
         filename (str): The filepath.
-        sep (str, default=","): The separator. e.g ',', '\t', etc
+        sep (str, default=","): The separator. e.g ",", "\t", etc
 
     Returns:
         data (pd.DataFrame): The loaded dataframe.
