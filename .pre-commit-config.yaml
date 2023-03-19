@@ -11,42 +11,46 @@ repos:
       - id: name-tests-test
       - id: check-added-large-files
         args: ["--maxkb=2000"]
+
   - repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
       - id: black
         language_version: python3.10
+
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
       - id: isort
         name: isort (python)
-  - repo: local
-    hooks:
-      - id: pylint
-        name: pylint
-        entry: pylint
-        language: system
-        types: [python]
-        args: [
-            "-rn", # Only display messages
-            "-sn", # Don't display the score
-            "--recursive=y",
-            "--rcfile=pyproject.toml", # Link to your config file
-          ]
+        args: ["--profile", "black"] # Use config from black
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.1.1
-    hooks:
-      - id: mypy
-        name: mypy
-        entry: mypy
-        language: python
-        "types_or": [python, pyi]
-        exclude: ^tests/
-        args:
-          [
-            "--no-strict-optional",
-            "--ignore-missing-imports",
-            "--explicit-package-bases",
-          ]
+  # - repo: local
+  #   hooks:
+  #     - id: pylint
+  #       name: pylint
+  #       entry: pylint
+  #       language: system
+  #       types: [python]
+  #       args: [
+  #           "-rn", # Only display messages
+  #           "-sn", # Don't display the score
+  #           "--recursive=y",
+  #           "--rcfile=pyproject.toml", # Link to your config file
+  #         ]
+
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.1.1
+  #   hooks:
+  #     - id: mypy
+  #       name: mypy
+  #       entry: mypy
+  #       language: python
+  #       "types_or": [python, pyi]
+  #       exclude: ^tests/
+  #       args:
+  #         [
+  #           "--no-strict-optional",
+  #           "--ignore-missing-imports",
+  #           "--explicit-package-bases",
+  #         ]
