@@ -1,15 +1,18 @@
 """This module is used for model evaluation."""
+
 import itertools
 from typing import Union
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from sklearn.metrics import (
     confusion_matrix,
     mean_absolute_error,
     mean_squared_error,
     r2_score,
 )
+from sklearn.model_selection import GridSearchCV
 
 
 def evaluate_regression_model(*, y_true: np.ndarray, y_pred: np.ndarray) -> str:
@@ -109,3 +112,25 @@ def plot_confusion_matrix(
             color=WHITE if c_matrix[i, j] > threshold else BLACK,
             size=SIZE,
         )
+
+
+def hyperparam_space(*, search_grid: GridSearchCV, ylabel: str, ylim: tuple) -> pd.DataFrame:
+    """This is used to plot the evaluation metric against the hyperparameter space.
+    It returns a DF containing the GridSearchCV best hyperparameter space"""
+
+    imp_vars = ["params", "mean_test_score", "std_test_score"]
+    results = pd.DataFrame(search_grid.cv_results_)[imp_vars]
+
+    # Sort the mean_test_scores in descending order and reset the index.
+    results.sort_values(by="mean_test_score", ascending=False, inplace=True)
+    results.reset_index(drop=True, inplace=True)
+
+    results["mean_test_score"].plot(
+        yerr=results["std_test_score"],
+        xlabel="Hyperparameter Space",
+        ylabel=f"{ylabel}",
+        ylim=ylim,
+    )
+
+    plt.show()
+    return results
