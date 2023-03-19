@@ -31,15 +31,28 @@ def split_data(
     target: str,
     random_state: int = 123,
     test_size: float = 0.2,
-    display_shape: bool = True,
+    display_shapes: bool = True,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """This splits the data into X_train, X_validation, y_train, y_validation."""
+    """This splits the data into X_train, X_validation, y_train, y_validation.
+
+    Params;
+        data (pd.Dataframe): The input data.
+        target (str): The dependent feature name.
+        random_state (int, default=123): An integer value for reproducibility.
+        test_size (float, default=0.2): The test size. It ranges between 0 and 1.
+        display_shapes (bool, default=True): If True, the shapes of the train and validation
+                                             data are displayed; otherwise False.
+
+
+    Returns:
+        data (pd.DataFrame): The loaded dataframe.
+    """
     X = data.drop(columns=[target])
     y = data.get(target)
 
     X_train, X_validation, y_train, y_validation = train_test_split(
         X, y, test_size=test_size, random_state=random_state
     )
-    if display_shape:
+    if display_shapes:
         print(f"Shape of X_train: {X_train.shape}, \nShape of X_validation: {X_validation.shape}")
     return (X_train, X_validation, y_train, y_validation)
