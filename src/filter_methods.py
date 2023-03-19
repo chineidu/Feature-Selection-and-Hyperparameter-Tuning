@@ -136,7 +136,7 @@ class BestFeatures:
         test_size: float = 0.2,
         display_shape: bool = True,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-        """This split the data into X_train, X_validation, y_train, y_validation."""
+        """This splits the data into X_train, X_validation, y_train, y_validation."""
         X = data.drop(columns=[target])
         y = data.get(target)
 
