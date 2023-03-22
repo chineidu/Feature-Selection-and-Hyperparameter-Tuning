@@ -43,14 +43,9 @@ repos:
     rev: v1.1.1
     hooks:
       - id: mypy
-        name: mypy
-        entry: mypy
+        additional_dependencies: [types-python-dateutil]
         language: python
         "types_or": [python, pyi]
+        verbose: true
         exclude: ^tests/
-        args:
-          [
-            "--no-strict-optional",
-            "--ignore-missing-imports",
-            "--explicit-package-bases",
-          ]
+        args: ["--explicit-package-bases", "--config-file", "./pyproject.toml"]
