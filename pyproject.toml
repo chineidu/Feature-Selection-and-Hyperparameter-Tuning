@@ -40,7 +40,7 @@ multi_line_output = 3
 py_version=39
 
 [tool.mypy]
-mypy_path = ["app"]
+mypy_path = ["src"]
 python_version = "3.10"
 warn_unused_ignores = true
 show_error_context = true
@@ -53,3 +53,4 @@ warn_unused_configs = true
 strict_optional = true
 disallow_any_generics = true
 show_error_codes = true
+explicit_package_bases = true
