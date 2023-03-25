@@ -1,0 +1,19 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build-and-Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          make setup-venv
+
+      - name: Run Tests
+        run: |
+          make checks
