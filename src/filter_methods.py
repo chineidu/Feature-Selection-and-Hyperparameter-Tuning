@@ -3,9 +3,11 @@ ML model with a single feature to predict the target."""
 # pylint: disable=simplifiable-if-expression
 # pylint: disable=too-many-instance-attributes
 
+from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from sklearn import metrics, model_selection
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
@@ -135,7 +137,7 @@ class BestFeatures:
         random_state: int = 123,
         test_size: float = 0.2,
         display_shape: bool = True,
-    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    ) -> tuple[npt.ArrayLike, npt.ArrayLike, npt.ArrayLike, npt.ArrayLike]:
         """This splits the data into X_train, X_validation, y_train, y_validation."""
         X = data.drop(columns=[target])
         y = data.get(target)
@@ -150,7 +152,7 @@ class BestFeatures:
         return (X_train, X_validation, y_train, y_validation)
 
     @staticmethod
-    def _sort_dict(*, input_dict: dict, ascending: bool = True) -> dict:
+    def _sort_dict(*, input_dict: dict[str, Any], ascending: bool = True) -> dict[str, Any]:
         """This is used to sort a dict using the values."""
         sorted_dict = dict(sorted(input_dict.items(), key=lambda x: x[1], reverse=ascending))
         return sorted_dict

@@ -1,6 +1,6 @@
 """This module is used to load and manipulate data."""
 
-import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -32,7 +32,7 @@ def split_data(
     random_state: int = 123,
     test_size: float = 0.2,
     display_shapes: bool = True,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+) -> tuple[npt.ArrayLike, npt.ArrayLike, npt.ArrayLike, npt.ArrayLike]:
     """This splits the data into X_train, X_validation, y_train, y_validation.
 
     Params;

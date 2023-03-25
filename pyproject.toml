@@ -53,4 +53,4 @@ warn_unused_configs = true
 strict_optional = true
 disallow_any_generics = true
 show_error_codes = true
-explicit_package_bases = true
+explicit_package_bases = false

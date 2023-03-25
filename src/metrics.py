@@ -5,6 +5,7 @@ from typing import Union
 
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from sklearn.metrics import (
     confusion_matrix,
@@ -15,7 +16,7 @@ from sklearn.metrics import (
 from sklearn.model_selection import GridSearchCV
 
 
-def evaluate_regression_model(*, y_true: np.ndarray, y_pred: np.ndarray) -> str:
+def evaluate_regression_model(*, y_true: npt.ArrayLike, y_pred: npt.ArrayLike) -> str:
     """This is used to evaluate a regression model."""
     # Mean Squared Error (The lower, the better)
     mse = mean_squared_error(y_true=y_true, y_pred=y_pred, squared=True)
@@ -46,10 +47,10 @@ def evaluate_regression_model(*, y_true: np.ndarray, y_pred: np.ndarray) -> str:
 # pylint: disable=too-many-locals
 def plot_confusion_matrix(
     *,
-    y_true: np.ndarray,
-    y_pred: np.ndarray,
+    y_true: npt.ArrayLike,
+    y_pred: npt.ArrayLike,
     classes: Union[bool, list[str], None] = None,
-    figsize: tuple = (12, 12),
+    figsize: tuple[int, int] = (12, 12),
 ) -> None:
     """This returns a confusion matrix plot.
 
@@ -114,7 +115,9 @@ def plot_confusion_matrix(
         )
 
 
-def hyperparam_space(*, search_grid: GridSearchCV, ylabel: str, ylim: tuple) -> pd.DataFrame:
+def hyperparam_space(
+    *, search_grid: GridSearchCV, ylabel: str, ylim: tuple[float, float]
+) -> pd.DataFrame:
     """This is used to plot the evaluation metric against the hyperparameter space.
     It returns a DF containing the GridSearchCV best hyperparameter space"""
 

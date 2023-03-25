@@ -47,4 +47,4 @@ repos:
         "types_or": [python, pyi]
         verbose: true
         exclude: ^tests/
-        args: ["--explicit-package-bases", "--config-file", "./pyproject.toml"]
+        args: ["--config-file", "./pyproject.toml"]
