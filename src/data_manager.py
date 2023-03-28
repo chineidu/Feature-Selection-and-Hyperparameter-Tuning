@@ -45,7 +45,7 @@ def split_data(
 
 
     Returns:
-        data (pd.DataFrame): The loaded dataframe.
+        X_train, X_validation, y_train, y_validation (tuple[npt.ArrayLike]): Tuple of ArrayLikes.
     """
     X = data.drop(columns=[target])
     y = data.get(target)
