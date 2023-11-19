@@ -9,6 +9,9 @@
     - [Joint distribution](#joint-distribution)
     - [Independent Probability](#independent-probability)
     - [Independent And Identically Distributed](#independent-and-identically-distributed)
+    - [Bayes Theorem](#bayes-theorem)
+    - [Click Through Rate (CTR)](#click-through-rate-ctr)
+    - [Conversion Rate](#conversion-rate)
   - [Hypothesis Testing](#hypothesis-testing)
     - [Examples](#examples)
       - [1) Testing the impactfulness of a new drug](#1-testing-the-impactfulness-of-a-new-drug)
@@ -20,6 +23,11 @@
     - [P-value](#p-value)
       - [Type I Error](#type-i-error)
       - [Type II Error](#type-ii-error)
+    - [More Examples (hypothesis testing)](#more-examples-hypothesis-testing)
+      - [1.) Drug testing](#1-drug-testing)
+      - [2.) Daily stock](#2-daily-stock)
+    - [Statistical Vs. Practical Significance](#statistical-vs-practical-significance)
+    - [Accept or Reject](#accept-or-reject)
 
 ## Types of Conitional Probabilities
 
@@ -42,6 +50,20 @@ In probability theory and statistics, a collection of random variables is said t
 - Independent means that the occurrence of one event does not affect the probability of any of the other events. For example, flipping a coin and getting heads does not make it more or less likely that you will get heads on the next flip.
 
 - Identically distributed means that all of the random variables have the same probability distribution. For example, if you flip a fair coin, the probability of getting heads is 0.5 for each flip.
+
+### Bayes Theorem
+
+$$p(A|B) = \frac{p(A|B).p(A)}{p(B)}$$
+
+### Click Through Rate (CTR)
+
+- Number of clicks per number of impressions.
+
+- CTR = (no of clicks) / (no of impressions)
+
+### Conversion Rate
+
+- conversion_rate = (number of desired actions) / (number of page visits)
 
 ## Hypothesis Testing
 
@@ -80,17 +102,17 @@ In probability theory and statistics, a collection of random variables is said t
 
 ### Types of Hypothesis Tests
 
-- 2 groups of data: `2 sample test`. e.g. control group vs treatment group.
+- **2 groups of data**: `2 sample test`. e.g. control group vs treatment group.
 
-- 1 group of data: `1-sample test`. e.g. stock return vs fixed value.
+- **1 group of data**: `1-sample test`. e.g. stock return vs fixed value.
 
-- 2 sided test:
+- **2 sided test**:
   - $\mu_1 > \mu_2$ can be significant.
   - $\mu_1 < \mu_2$ can be significant.
   - $H_0 : \mu_1 = \mu_2$
   - $H_1 : \mu_1 \neq \mu_2$ (i.e. $\mu_1 < \mu_2$  or $\mu_1 > \mu_2$)
 
-- 1 sided test:
+- **1 sided test**:
   - $\mu_1 > \mu_2$ can be significant.
   - $H_0 : \mu_1 \leq \mu_2$
   - $H_1 : \mu_1 > \mu_2$
@@ -138,3 +160,30 @@ ttest_ind(x_1, x_2) # 2-sample test
 
 - Definition: Failing to reject a `false` null hypothesis.
 - Probability of making the error: Beta ($\beta$)
+
+### More Examples (hypothesis testing)
+
+#### 1.) Drug testing
+
+- We're testing a drug.
+- Control is group A, treatment is group B.
+- We select a significance threshold of 5%.
+- We obtain a `p-value` of 0.01.
+- Since 0.01 < 0.05, the effect of the treatment is statistically significant.
+
+#### 2.) Daily stock
+
+- We check if the mean daily stock return is greater than 0.
+- We select a significance threshold of 1%.
+- Since 0.1 > 0.01, even if the average daily stock is greater than 0, the difference is not statistically significant.
+
+### Statistical Vs. Practical Significance
+
+- Statistical significance does not imply practical significance.
+- e.g. if a drug increases the lifespan by 1 second but costs billions of USD, is it a practical investment? NAH!
+- iff the click through rate of one ad is 1.1% and the click through rate of another ad is 1%, it may lead to an appreciable increase in revenue.
+
+### Accept or Reject
+
+- If the `p-value` is below the significance threshold, the we **`reject`** the null hypothesis.
+- If the `p-value` is above the significance threshold, we **`fail to reject`** the null hypothesis.
