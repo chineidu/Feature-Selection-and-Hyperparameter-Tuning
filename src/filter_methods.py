@@ -12,6 +12,10 @@ import pandas as pd
 from sklearn import metrics, model_selection
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 
+from src.logger import get_console_logger
+
+logger = get_console_logger()
+
 
 class BestFeatures:
     """This is used to calculate the best features by creating a simple
@@ -59,7 +63,7 @@ class BestFeatures:
             "status": self.status,
         }
 
-        print(message)
+        logger.info(message)
 
         for feat in self.data.columns:
             if feat != self.target:
@@ -116,7 +120,7 @@ class BestFeatures:
             if self.type_ == self.REGRESSION
             else np.median(df[eval_metric])
         )
-        print(f"Threshold: {THRESH}")
+        logger.info(f"Threshold: {THRESH}")
 
         df.plot(
             kind="bar",
@@ -146,7 +150,7 @@ class BestFeatures:
             X, y, test_size=test_size, random_state=random_state
         )
         if display_shape:
-            print(
+            logger.info(
                 f"Shape of X_train: {X_train.shape}, \nShape of X_validation: {X_validation.shape}"
             )
         return (X_train, X_validation, y_train, y_validation)

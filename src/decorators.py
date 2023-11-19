@@ -4,6 +4,10 @@ import time
 from functools import wraps
 from typing import Any, Callable
 
+from src.logger import get_console_logger
+
+logger = get_console_logger()
+
 
 def shape_of_array(func: Callable[..., Any]) -> Callable[..., Any]:
     """This returns the shape of the NumPy array, Pandas
@@ -12,7 +16,7 @@ def shape_of_array(func: Callable[..., Any]) -> Callable[..., Any]:
     @wraps(func)
     def wrapper(*args, **kwargs) -> str:  # type: ignore[no-untyped-def]
         input_ = func(*args, **kwargs)
-        print(f"Shape of data: {input_.shape}\n")
+        logger.info(f"Shape of data: {input_.shape}\n")
         return input_
 
     return wrapper
@@ -26,7 +30,7 @@ def timer(func: Callable[..., Any]) -> Callable[..., Any]:
         start_time = time.time()
         result = func(*args, **kwargs)
         stop_time = time.time()
-        print(f"Duration: {round((stop_time - start_time), 3)} seconds")
+        logger.info(f"Duration: {round((stop_time - start_time), 3)} seconds")
         return result
 
     return wrapper

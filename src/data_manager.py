@@ -6,6 +6,9 @@ from sklearn.model_selection import train_test_split
 
 # Custom imports
 from src.decorators import shape_of_array, timer
+from src.logger import get_console_logger
+
+logger = get_console_logger()
 
 
 @timer
@@ -54,5 +57,7 @@ def split_data(
         X, y, test_size=test_size, random_state=random_state
     )
     if display_shapes:
-        print(f"Shape of X_train: {X_train.shape}, \nShape of X_validation: {X_validation.shape}")
+        logger.info(
+            f"Shape of X_train: {X_train.shape}, \nShape of X_validation: {X_validation.shape}"
+        )
     return (X_train, X_validation, y_train, y_validation)
