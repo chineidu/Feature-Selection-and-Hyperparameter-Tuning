@@ -11,8 +11,15 @@
     - [Independent And Identically Distributed](#independent-and-identically-distributed)
   - [Hypothesis Testing](#hypothesis-testing)
     - [Examples](#examples)
-      - [1)](#1)
-      - [2)](#2)
+      - [1) Testing the impactfulness of a new drug](#1-testing-the-impactfulness-of-a-new-drug)
+      - [2) Testing the impactfulness of a new web page](#2-testing-the-impactfulness-of-a-new-web-page)
+    - [Notation](#notation)
+    - [Types of Hypothesis Tests](#types-of-hypothesis-tests)
+  - [Statistical Significance](#statistical-significance)
+  - [Hypothesis Function](#hypothesis-function)
+    - [P-value](#p-value)
+      - [Type I Error](#type-i-error)
+      - [Type II Error](#type-ii-error)
 
 ## Types of Conitional Probabilities
 
@@ -40,7 +47,7 @@ In probability theory and statistics, a collection of random variables is said t
 
 ### Examples
 
-#### 1)
+#### 1) Testing the impactfulness of a new drug
 
 ```text
 - Imagine a scenario where you're trying to test the effectiveness of a new drug against an already existing drug.
@@ -54,9 +61,80 @@ In probability theory and statistics, a collection of random variables is said t
 - The goal is to find if there's any statistical difference between µ_1 and µ_2.
 ```
 
-#### 2)
+#### 2) Testing the impactfulness of a new web page
 
 ```text
 - We have 2 web page designs and we want to know which page users spend more time on.
 - We might want to split the users into 2 groups (control and test) and record how long users in each group spend on the web page.
 ```
+
+### Notation
+
+- In a `2-sample test` (for a drug test)
+
+- Null Hypothesis ($H_0$):
+  $$H_0 : \mu_1 = \mu_2$$
+
+- Alternative Hypothesis ($H_1$):
+  $$H_1 : \mu_1 \neq \mu_2$$
+
+### Types of Hypothesis Tests
+
+- 2 groups of data: `2 sample test`. e.g. control group vs treatment group.
+
+- 1 group of data: `1-sample test`. e.g. stock return vs fixed value.
+
+- 2 sided test:
+  - $\mu_1 > \mu_2$ can be significant.
+  - $\mu_1 < \mu_2$ can be significant.
+  - $H_0 : \mu_1 = \mu_2$
+  - $H_1 : \mu_1 \neq \mu_2$ (i.e. $\mu_1 < \mu_2$  or $\mu_1 > \mu_2$)
+
+- 1 sided test:
+  - $\mu_1 > \mu_2$ can be significant.
+  - $H_0 : \mu_1 \leq \mu_2$
+  - $H_1 : \mu_1 > \mu_2$
+
+## Statistical Significance
+
+- When comparing groups, we can't just compare only the averages.
+- 3 variables are important:
+  - Number of samples collected.
+  - Variance of the samples.
+  - Difference in the size. e.g. difference in means (averages)
+
+## Hypothesis Function
+
+- Given the data:
+  - 1-sample test: $x$
+  - 2-sample test: $x_1, x_2$
+
+```python
+# Statsmodels
+ztest(x) # 1-sample test
+ztest(x_1, x_2) # 2-sample test
+
+
+# Scipy
+ttest_1samp(x) # 1-sample test
+ttest_ind(x_1, x_2) # 2-sample test
+```
+
+- The output tells us whether or not the difference is `statistically significant`.
+
+### P-value
+
+- This is the probability of observing a result as extreme or more extreme than what was observed assuming the null hypothesis is true.
+- e.g. the null hypothesis is that the (true) mean stock is 0. If the observed (measured) average daily stock return was 100bp with variance of 10.
+- The `p-value` would be very small if the null hypothesis were to be false.
+- Generally, the `p-value` is compared to a significant threshold/level.
+
+#### Type I Error
+
+- Definition: Rejecting a `true` null hypothesis.
+- Probability of making the error: Alpha ($\alpha$)
+
+#### Type II Error
+
+- Definition: Failing to reject a `false` null hypothesis.
+- Probability of making the error: Beta ($\beta$)

@@ -1,15 +1,15 @@
-.PHONY: setup-venv clean-pyc clean-test test style lint checks
+.PHONY: setup-venv clean-pyc clean-test test style_n_lint checks
 
 SRC_CODE:="src"
 COVERAGE_THRESH:=55
 
 help:
 	@echo "Commands:"
-	@echo "\tsetup_venv:       creates a virtual environment."
-	@echo "\tclean:            cleans all unnecessary files."
-	@echo "\ttest:             runs Pytest."
-	@echo "\tstyle:            executes style, lint and type formatting."
-	@echo "\tchecks:           executes tests and style (RECOMMENDEED)."
+	@echo "\tsetup_venv:          creates a virtual environment."
+	@echo "\tclean:               cleans all unnecessary files."
+	@echo "\ttest:                runs Pytest."
+	@echo "\tstyle_n_lint:        executes style, lint and type formatting."
+	@echo "\tchecks:              executes tests and style (RECOMMENDEED)."
 	@echo ""
 
 
@@ -39,10 +39,7 @@ test: clean # src is the source code
 	&& pytest -svv --cov=${SRC_CODE} --cov-report=term-missing \
 	--cov-fail-under ${COVERAGE_THRESH}
 
-style:
-	. venv/bin/activate && pylint ${SRC_CODE} && mypy ${SRC_CODE}
+style_n_lint:
+	. venv/bin/activate && ruff ${SRC_CODE} --fix && mypy ${SRC_CODE}
 
-lint:
-	. venv/bin/activate && black ${SRC_CODE} && isort ${SRC_CODE}
-
-checks: test lint style clean
+checks: test clean style_n_lint
