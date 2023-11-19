@@ -7,36 +7,8 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
-      - id: debug-statements
       - id: check-added-large-files
         args: ["--maxkb=2000"]
-
-  - repo: https://github.com/psf/black
-    rev: 22.10.0
-    hooks:
-      - id: black
-        language_version: python3.10
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.10.1
-    hooks:
-      - id: isort
-        name: isort (python)
-        args: ["--profile", "black"] # Use config from black
-
-  - repo: local
-    hooks:
-      - id: pylint
-        name: pylint
-        entry: pylint
-        language: system
-        types: [python]
-        args: [
-            "-rn", # Only display messages
-            "-sn", # Don't display the score
-            "--recursive=y",
-            "--rcfile=pyproject.toml", # Link to your config file
-          ]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.1.1
@@ -54,3 +26,13 @@ repos:
             "--config-file",
             "./pyproject.toml",
           ]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.1.4
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [--fix]
+      # Run the formatter.
+      - id: ruff-format
