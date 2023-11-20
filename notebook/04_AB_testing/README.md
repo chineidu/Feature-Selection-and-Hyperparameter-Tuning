@@ -10,6 +10,7 @@
     - [Independent Probability](#independent-probability)
     - [Independent And Identically Distributed](#independent-and-identically-distributed)
     - [Bayes Theorem](#bayes-theorem)
+  - [Common Test Metrics](#common-test-metrics)
     - [Click Through Rate (CTR)](#click-through-rate-ctr)
     - [Conversion Rate](#conversion-rate)
   - [Hypothesis Testing](#hypothesis-testing)
@@ -54,6 +55,8 @@ In probability theory and statistics, a collection of random variables is said t
 ### Bayes Theorem
 
 $$p(A|B) = \frac{p(A|B).p(A)}{p(B)}$$
+
+## Common Test Metrics
 
 ### Click Through Rate (CTR)
 
