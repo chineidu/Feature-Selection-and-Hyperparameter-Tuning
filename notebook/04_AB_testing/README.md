@@ -29,6 +29,13 @@
       - [2.) Daily stock](#2-daily-stock)
     - [Statistical Vs. Practical Significance](#statistical-vs-practical-significance)
     - [Accept or Reject](#accept-or-reject)
+  - [Sample Size Calculation](#sample-size-calculation)
+    - [Significance Level $(\\alpha)$](#significance-level-alpha)
+    - [Delta](#delta)
+      - [Example On Delta](#example-on-delta)
+    - [Estimating The Variance of The Treatment Group](#estimating-the-variance-of-the-treatment-group)
+    - [Generalized Formula](#generalized-formula)
+    - [Example (Number of samples calculation)](#example-number-of-samples-calculation)
 
 ## Types of Conitional Probabilities
 
@@ -190,3 +197,62 @@ ttest_ind(x_1, x_2) # 2-sample test
 
 - If the `p-value` is below the significance threshold, the we **`reject`** the null hypothesis.
 - If the `p-value` is above the significance threshold, we **`fail to reject`** the null hypothesis.
+
+## [Sample Size Calculation](https://www.youtube.com/watch?v=KC1nwY7YCUE&ab_channel=DataInterview)
+
+> These notes are from this awesome [tutorial](https://www.youtube.com/watch?v=KC1nwY7YCUE&ab_channel=DataInterview).
+
+- The sample size to used for an A/B test can be calculated using the `Power Analysis`.
+- The following variables are used:
+
+1. Significance Level $(\alpha)$
+2. Statistical Power.
+3. Minimum detectable Effect (MDE).
+4. Variance $(\sigma^2)$
+
+- it can be calculated for each group using:
+
+$$n = \frac{ (Z_{1 - \frac{\alpha}{2}} - Z_{1 - \beta} )^2 * \sigma^2 }{\Delta^2}$$
+where:
+
+$Z_{1 - \frac{\alpha}{2}}$ = z-critical value of the significance level $(\alpha)$
+
+$Z_{1 - \beta}$ = z-critical value of the statistical power
+
+$\sigma^2$ = Variance
+
+$\Delta^2$ = Delta (Absolute difference)
+
+### Significance Level $(\alpha)$
+
+- This is a threshold for which a p-value of an observed effect is considered as statistically significant.
+
+[![image.png](https://i.postimg.cc/4NCsSLxj/image.png)](https://postimg.cc/xqPwkPHP)
+
+- Standard normal distribution has a `mean` of 0 and a `standard deviation` of 1.
+
+### Delta
+
+- **Delta**: This is the absolute difference between two parameters.
+
+[![image.png](https://i.postimg.cc/j208h8hV/image.png)](https://postimg.cc/0Mndk03Z)
+
+#### Example On Delta
+
+[![image.png](https://i.postimg.cc/KzZjgbdC/image.png)](https://postimg.cc/Ty4fZz2c)
+
+### Estimating The Variance of The Treatment Group
+
+[![image.png](https://i.postimg.cc/rwkDL5f8/image.png)](https://postimg.cc/7fKH3Jvc)
+
+### Generalized Formula
+
+- Sample Size Calculation
+
+[![image.png](https://i.postimg.cc/Y9cVXqpy/image.png)](https://postimg.cc/1gHJXSVp)
+
+### Example (Number of samples calculation)
+
+- Calculate the total number of samples for the 2 groups.
+
+[![image.png](https://i.postimg.cc/nLVYpy3c/image.png)](https://postimg.cc/FYqJxBt2)
