@@ -5,8 +5,11 @@ matplotlib==3.7.1
 nb_black==1.0.7
 numpy==1.24.2
 pandas==1.5.3
+polars==0.19.15
 pre-commit==2.19.0
+pyarrow==14.0.1
 rich==13.7.0
 ruff==0.1.6
 scikit-learn==1.2.2
+seaborn==-0.13.0
 typeguard==4.1.5
