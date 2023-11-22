@@ -11,5 +11,5 @@ pyarrow==14.0.1
 rich==13.7.0
 ruff==0.1.6
 scikit-learn==1.2.2
-seaborn==-0.13.0
+seaborn==0.13.0
 typeguard==4.1.5
